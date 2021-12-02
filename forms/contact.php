@@ -1,41 +1,31 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+$link = mysqli_connect("localhost", "root", "", "feedback"); //root as default username 
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+// Check connection
+if ($link === false) {
+  die("ERROR: Could not connect. " . mysqli_connect_error());
+}
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+// Escape user inputs for security
+$name = mysqli_real_escape_string($link, $_REQUEST['name']);
+$email = mysqli_real_escape_string($link, $_REQUEST['email']);
+$subject = mysqli_real_escape_string($link, $_REQUEST['subject']);
+$message = mysqli_real_escape_string($link, $_REQUEST['message']);
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
 
-  echo $contact->send();
-?>
+// Attempt insert query execution
+$sql = "INSERT INTO contact (name, email, subject, message) VALUES ('$name', '$email', '$subject', '$message')";
+if (mysqli_query($link, $sql)) {
+  echo "<script>
+    alert('Thank You For Contacting us');
+                 
+    window.location.href='index.html';
+    </script>";
+} else {
+  echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+}
+
+// Close connection
+mysqli_close($link);

@@ -487,8 +487,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 30px;
   border-radius: 50px;
   transition: 0.5s;
-  color: rgb(255, 255, 255);
-  background: #1977cc;
+   color: #3080c5;
+  background: #ffffff;
 }
 
 #hero .btn-get-started:hover {

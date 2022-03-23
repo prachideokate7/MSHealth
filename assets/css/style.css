@@ -10,7 +10,7 @@
 --------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
-  color: #c4bdbd;
+   color: #044c8b;
 }
 
 a {
@@ -467,11 +467,11 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 56px;
   text-transform: uppercase;
-  color: #ffffff;
+  color: 3080c5;
 }
 
 #hero h2 {
-  color: #ffffff;
+ color: 3080c5;
   margin: 10px 0 0 0;
   font-size: 24px;
 }
@@ -487,8 +487,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 30px;
   border-radius: 50px;
   transition: 0.5s;
-   color: #3080c5;
-  background: #ffffff;
+    color: #ffffff;
+  background: #3080c5;
 }
 
 #hero .btn-get-started:hover {
